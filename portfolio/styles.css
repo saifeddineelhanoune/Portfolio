@@ -14,9 +14,9 @@
   }
   :root {
     --bg-color: #080808;
-    --second-bg-color: #f07810;
+    --second-bg-color: #8b10f0;
     --text-color: #f5f4e8;
-    --main-color: #cd0d66;
+    --main-color: #48c9f8;
   }
 
   body {
@@ -115,8 +115,8 @@
 
   .home-img img:hover {
     box-shadow: 0 0 25px var(--main-color),
-                0 0 25px var(--main-color),
-                0 0 25px var(--main-color);
+                0 0 50px var(--main-color),
+                0 0 75px var(--main-color);
   }
 .social-icons {
     display: inline-flex;
@@ -153,4 +153,23 @@
     font-size: 1.8rem;
     color: #080808;
     border: 2px solid transparent;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--main-color),
+                0 0 50px var(--main-color);
+}
+
+.btn-group a:nth-last-of-type(2) {
+    background-color: #080808;
+    color: var(--main-color);
+    border: 2px solid var(--main-color);
+    box-shadow: 0 0 25px transparent;
+}
+
+.btn-group a:nth-last-of-type(2):hover {
+    box-shadow: 0 0 25px var(--main-color);
+    background-color: var(--main-color);
+    color: #8b10f0;
 }
