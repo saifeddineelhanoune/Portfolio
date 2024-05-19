@@ -14,9 +14,9 @@
   }
   :root {
     --bg-color: #080808;
-    --second-bg-color: #001005;
-    --text-color: white;
-    --main-color: #00ff51;
+    --second-bg-color: #f07810;
+    --text-color: #f5f4e8;
+    --main-color: #cd0d66;
   }
 
   body {
