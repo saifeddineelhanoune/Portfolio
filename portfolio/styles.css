@@ -177,5 +177,5 @@
 .btn-group a:nth-last-of-type(2):hover {
     box-shadow: 0 0 25px var(--main-color);
     background-color: var(--main-color);
-    color: #8b10f0;
+    color: black;
 }
