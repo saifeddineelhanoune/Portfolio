@@ -12,12 +12,18 @@
     font-size: 60%;
     overflow-x: hidden;
   }
-  :root {
+  /* :root {
     --bg-color: #080808;
     --second-bg-color: #8b10f0;
     --text-color: #f5f4e8;
     --main-color: #48c9f8;
-  }
+  } */
+  :root {
+    --bg-color: #000000;
+    --second-bg-color: #003366;
+    --text-color: white;
+    --main-color: #FF0000;
+}
 
   body {
     background: var(--bg-color);
@@ -108,7 +114,7 @@
 
   .home-img img {
     width: 32vw;
-    border-radius: 50%;
+    border-radius: 40%;
     box-shadow: 0 0 25px var(--main-color);
     transition: 0.4s ease-in-out;
   }
@@ -125,8 +131,8 @@
     font-size: 3rem;
     padding: 1rem;
     background: transparent;
-    border: 2px solid var(--main-color);
-    border-radius: 50%;
+    border: 2px dashed var(--main-color);
+    border-radius: 10%;
     color: var(--main-color);
     margin: 3rem 0.5rem;
     transition: 0.3s ease;
