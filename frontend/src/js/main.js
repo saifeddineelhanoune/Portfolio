@@ -4,7 +4,7 @@ import '../css/animations.css';
 
 // Import Three.js modules
 import { initThreeScene } from './three/scene';
-import { initAnimations } from './animation';
+import { initAnimations } from './animation.js';
 
 // Import GitHub API module
 import { fetchGitHubProjects } from './github/api';
