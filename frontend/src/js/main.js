@@ -7,7 +7,15 @@ import { initThreeScene } from './three/scene';
 import { initAnimations } from './animation.js';
 
 // Import GitHub API module
-import { fetchGitHubProjects } from './github/api';
+import { fetchGitHubProjects, displayGitHubError } from './github/api';
+
+// Import new animation modules
+import { 
+  initializeSkillsFilter, 
+  initializeTimeline, 
+  loadSampleProjects, 
+  initializePageLoader 
+} from './animations.js';
 
 // DOM elements
 const themeToggle = document.querySelector('.theme-toggle');
@@ -17,6 +25,9 @@ const navLinks = document.querySelectorAll('.nav ul li a');
 const contactForm = document.getElementById('contact-form');
 const formMessage = document.getElementById('form-message');
 
+// Initialize page loader before DOM content is fully loaded
+initializePageLoader();
+
 // Initialize Three.js scene
 document.addEventListener('DOMContentLoaded', () => {
   // Init Three.js scene
@@ -24,6 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Init animations
   initAnimations();
+  
+  // Init new sections
+  initializeSkillsFilter();
+  initializeTimeline();
   
   // Fetch GitHub projects
   fetchGitHubProjects();
@@ -59,13 +74,34 @@ function setupEventListeners() {
     });
   });
   
+  // GitHub API error event listener
+  window.addEventListener('github-api-error', (event) => {
+    // Display error message in the UI
+    displayGitHubError(event.detail.message);
+    
+    // Add a load sample projects button
+    const projectsContainer = document.querySelector('.github-projects');
+    if (projectsContainer) {
+      const loadSampleBtn = document.createElement('button');
+      loadSampleBtn.id = 'load-sample-projects';
+      loadSampleBtn.classList.add('btn', 'btn-primary', 'mt-3');
+      loadSampleBtn.innerHTML = '<i class="fas fa-code"></i> Load Sample Projects';
+      loadSampleBtn.addEventListener('click', loadSampleProjects);
+      
+      // Add button to container if it doesn't already exist
+      if (!document.getElementById('load-sample-projects')) {
+        projectsContainer.appendChild(loadSampleBtn);
+      }
+    }
+  });
+  
+  // Scroll event listener
+  window.addEventListener('scroll', handleScroll);
+  
   // Contact form submission
   if (contactForm) {
-    contactForm.addEventListener('submit', handleFormSubmit);
+    contactForm.addEventListener('submit', handleContactFormSubmit);
   }
-  
-  // Header scroll effect
-  window.addEventListener('scroll', handleScroll);
 }
 
 // Toggle theme between light and dark mode
@@ -101,7 +137,7 @@ function toggleMobileNav() {
 }
 
 // Handle contact form submission
-async function handleFormSubmit(e) {
+async function handleContactFormSubmit(e) {
   e.preventDefault();
   
   const formData = new FormData(contactForm);

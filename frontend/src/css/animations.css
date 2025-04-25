@@ -238,6 +238,69 @@
   }
 }
 
+/* Page Loader Animation */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+.page-loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-content {
+  text-align: center;
+}
+
+.loader-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(var(--accent-rgb), 0.3);
+  border-radius: 50%;
+  border-top-color: var(--accent-color);
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto 20px;
+}
+
+.loader-logo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.loader-progress {
+  width: 200px;
+  height: 4px;
+  background-color: rgba(var(--primary-rgb), 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.loader-progress-bar {
+  height: 100%;
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  transition: width 0.3s ease-out;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 /* Loading Animation for Project Cards */
 .project-card.loading {
   animation: pulse 1.5s infinite;
@@ -404,5 +467,126 @@
   }
   100% {
     transform: translateY(-100vh) rotate(360deg);
+  }
+}
+
+/* Door Transition Effect */
+.door-transition-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.door-left, .door-right {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background: var(--primary-color);
+  top: 0;
+  transition: transform 1s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.door-left {
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.door-right {
+  right: 0;
+  transform: translateX(100%);
+}
+
+.door-transition-active .door-left {
+  transform: translateX(0);
+}
+
+.door-transition-active .door-right {
+  transform: translateX(0);
+}
+
+/* Glitch Effect on Scroll */
+.glitch-on-scroll {
+  position: relative;
+  overflow: hidden;
+}
+
+.glitch-on-scroll::before,
+.glitch-on-scroll::after {
+  content: attr(data-text);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.glitch-on-scroll::before {
+  left: -2px;
+  text-shadow: 1px 0 var(--accent-color);
+  background: var(--bg-color);
+  animation: glitch-anim-1 0.4s infinite linear alternate-reverse;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glitch-on-scroll::after {
+  left: 2px;
+  text-shadow: -1px 0 var(--primary-color);
+  background: var(--bg-color);
+  animation: glitch-anim-2 0.4s infinite linear alternate-reverse;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glitch-on-scroll.active::before,
+.glitch-on-scroll.active::after {
+  opacity: 0.5;
+}
+
+@keyframes glitch-anim-1 {
+  0% {
+    transform: translateX(0);
+  }
+  80% {
+    transform: translateX(0);
+  }
+  85% {
+    transform: translateX(-2px);
+  }
+  90% {
+    transform: translateX(2px);
+  }
+  95% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes glitch-anim-2 {
+  0% {
+    transform: translateX(0);
+  }
+  80% {
+    transform: translateX(0);
+  }
+  85% {
+    transform: translateX(2px);
+  }
+  90% {
+    transform: translateX(-2px);
+  }
+  95% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
